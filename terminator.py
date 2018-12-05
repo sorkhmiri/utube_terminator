@@ -47,7 +47,7 @@ def initialize():
     if not os.path.exists(DOWNLOAD_DIR):
         os.mkdir(DOWNLOAD_DIR)
     global UTUBE_DIR
-    UTUBE_DIR = os.path.join(os.path.abspath(os.path.dirname(__file__)), '.tube')
+    UTUBE_DIR = os.path.join(os.path.abspath(os.path.dirname(__file__)), '.utube')
     if not os.path.exists(UTUBE_DIR):
         os.mkdir(UTUBE_DIR)
 
@@ -162,8 +162,8 @@ def stream_picker(streams, typee, formatt, res):
 
 
 def video_download(Url, itag, playlist_id):
-    global UTUBE_DIR
-    YouTube(Url).streams.get_by_itag(itag).download(os.path.join(UTUBE_DIR, playlist_id))
+    global DOWNLOAD_DIR
+    YouTube(Url).streams.get_by_itag(itag).download(os.path.join(DOWNLOAD_DIR, playlist_id))
 
 
 def single_video_downloader(Url, typee, formatt, res, playlist_id):
@@ -183,11 +183,11 @@ def list_Terminator(Url, Sub):
         print(str(i+1) + "-"+ title_for_url(videos[i]))
     select = input("Enter Number of videos you want with '-' between:")
 
-    global UTUBE_DIR
-    if not os.path.exists(UTUBE_DIR):
-        os.mkdir(UTUBE_DIR)
-    if not os.path.exists(os.path.join(UTUBE_DIR, 'pi')):
-        os.mkdir(os.path.join(UTUBE_DIR, 'pi'))
+    global DOWNLOAD_DIRD
+    if not os.path.exists(DOWNLOAD_DIR):
+        os.mkdir(DOWNLOAD_DIR)
+    if not os.path.exists(os.path.join(DOWNLOAD_DIR, 'pi')):
+        os.mkdir(os.path.join(DOWNLOAD_DIR, 'pi'))
 
     if (not Sub) and (select == '0'):
         # just download all list without sub
