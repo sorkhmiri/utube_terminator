@@ -88,7 +88,7 @@ def set_files_generator(playlist_id, videos):
         pickle.dump(videos, file)
 
 
-def get_video_urls (playlist_id):
+def get_video_urls(playlist_id):
     # extracts playlist links with given id
     rawhtml = requests.get("https://www.youtube.com/playlist?list={}".format(playlist_id)).text
     patern = re.compile(r'watch\?v=\S+?list=' + playlist_id)
@@ -162,7 +162,8 @@ def stream_picker(streams, typee, formatt, res):
 
 
 def video_download(Url, itag, playlist_id):
-    YouTube(Url).streams.get_by_itag(itag).download('/home/mahdi/Downloads/utube/'+playlist_id)
+    global UTUBE_DIR
+    YouTube(Url).streams.get_by_itag(itag).download(os.path.join(UTUBE_DIR, playlist_id))
 
 
 def single_video_downloader(Url, typee, formatt, res, playlist_id):
@@ -174,6 +175,8 @@ def single_video_downloader(Url, typee, formatt, res, playlist_id):
 
 def list_Terminator(Url, Sub):
     pi = get_play_list_id(Url)
+    if pi is None:
+        return
     videos, number = get_video_urls(pi)
     print("there are {} videos in this playlist".format(number))
     for i in range(len(videos)):
