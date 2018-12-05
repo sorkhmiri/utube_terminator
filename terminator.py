@@ -80,8 +80,8 @@ def final_video_urls(Urls):
 
 
 def set_files_generator(playlist_id, videos):
-    global UTUBE_DIR
-    play_list_dir = os.path.join(UTUBE_DIR, playlist_id)
+    global DOWNLOAD_DIR
+    play_list_dir = os.path.join(DOWNLOAD_DIR, playlist_id)
     if not os.path.exists(play_list_dir):
         os.mkdir(play_list_dir)
     with open(os.path.join(play_list_dir, '.utt'), "wb") as file:
